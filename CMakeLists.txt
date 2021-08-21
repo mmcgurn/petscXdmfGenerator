@@ -25,7 +25,10 @@ target_link_libraries(petscXdmfGenerator PRIVATE petscXdmfGeneratorLibrary ${HDF
 
 # Add required warnings for projects
 function(default_target_compile_options target)
-    target_compile_options(${target} PUBLIC $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Werror -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -Wsign-compare -fstack-protector -fno-stack-check -fvisibility=hidden>)
+    if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+        target_compile_options(${target} PUBLIC $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Werror -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -Wsign-compare -fstack-protector -fno-stack-check -fvisibility=hidden>)
+        message(Applying target compile options)
+    endif()
 endfunction()
 
 default_target_compile_options(petscXdmfGeneratorLibrary)
