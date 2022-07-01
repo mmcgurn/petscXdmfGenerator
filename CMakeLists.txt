@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 # Create the new project
-project(PetscXdmf VERSION 0.1.2)
+project(xdmfGenerator VERSION 0.1.2)
 
 # Set the standards
 set(CMAKE_CXX_STANDARD 17)
@@ -11,6 +11,8 @@ add_library(petscXdmfGeneratorLibrary)
 # Include access to HDF
 find_package(HDF5 REQUIRED)
 target_include_directories(petscXdmfGeneratorLibrary PRIVATE ${HDF5_INCLUDE_DIRS})
+
+if(targets)
 
 # Load in the lib
 add_subdirectory(src)
